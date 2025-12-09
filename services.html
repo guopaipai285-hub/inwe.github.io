@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务项目 - 因未创新</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #f97316;
+            --text-color: #1f2937;
+            --bg-color: #fefefe;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+        
+        .section-title {
+            font-family: 'Noto Serif SC', serif;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .course-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .course-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .course-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+        
+        .course-modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-sm z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <img src="resources/logo.png" alt="因未创新" class="h-10 w-auto">
+                    <span class="ml-3 text-xl font-bold text-gray-900">因未创新</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="nav-link text-gray-600 hover:text-gray-900 font-medium">首页</a>
+                        <a href="about.html?v=20251208" class="nav-link text-gray-600 hover:text-gray-900 font-medium">关于我们</a>
+                        <a href="services.html" class="nav-link text-gray-900 font-medium">服务项目</a>
+                        <a href="achievements.html" class="nav-link text-gray-600 hover:text-gray-900 font-medium">最新资讯</a>
+                        <a href="contact.html" class="nav-link text-gray-600 hover:text-gray-900 font-medium">联系我们</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-gray-900">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-gray-600 hover:text-gray-900">首页</a>
+                <a href="about.html?v=20251208" class="block px-3 py-2 text-gray-600 hover:text-gray-900">关于我们</a>
+                <a href="services.html" class="block px-3 py-2 text-gray-900 font-medium">服务项目</a>
+                <a href="achievements.html" class="block px-3 py-2 text-gray-600 hover:text-gray-900">最新资讯</a>
+                <a href="contact.html" class="block px-3 py-2 text-gray-600 hover:text-gray-900">联系我们</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-blue-50 to-orange-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="section-title text-4xl md:text-5xl font-bold mb-6">服务项目</h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    专业的科技创新课程，满足不同年龄段学习者的需求
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Filter -->
+    <section class="py-12 bg-white border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap justify-center gap-4">
+                <button class="filter-btn active px-6 py-3 rounded-full border border-gray-300 font-medium" data-filter="all">
+                    全部课程
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full border border-gray-300 font-medium" data-filter="3-6">
+                    3-6岁
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full border border-gray-300 font-medium" data-filter="7-12">
+                    7-12岁
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full border border-gray-300 font-medium" data-filter="13-18">
+                    13-18岁
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full border border-gray-300 font-medium" data-filter="adult">
+                    PBL课程
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Grid -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div id="courses-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Course 1: 无人机智造 -->
+                <div class="course-card bg-white rounded-2xl overflow-hidden shadow-lg" 
+                     data-category="13-18" 
+                     data-course-id="drone-making">
+                    <div class="h-48 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                        <img src="resources/PIY.png" alt="乐高-搭建（基础）" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">无人机智造</h3>
+                        <p class="text-gray-600 mb-4">高阶课程，完整体验智能飞行器制作全过程</p>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>适合年龄：12-18岁</span>
+                            <span>课时：12课时</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>难度：高阶</span>
+                            <span class="text-blue-600 font-medium">课时费:199元/课时+材料费:980元</span>
+                        </div>
+                        <button class="btn-primary w-full py-2 rounded-lg text-white font-medium course-detail-btn" data-course="drone-making">
+                            了解详情
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course 2: AI创意绘画 -->
+                <div class="course-card bg-white rounded-2xl overflow-hidden shadow-lg" 
+                     data-category="7-12" 
+                     data-course-id="ai-painting">
+                    <div class="h-48 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+                        <img src="resources/AI绘画.png" alt="AI创意绘画" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">AI创意绘画</h3>
+                        <p class="text-gray-600 mb-4">让人工智能成为孩子创意的放大器</p>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>适合年龄：8-16岁</span>
+                            <span>课时：8课时</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>难度：中阶</span>
+                            <span class="text-blue-600 font-medium">课时费：60元/课时 + 材料费：40元</span>
+                        </div>
+                        <button class="btn-primary w-full py-2 rounded-lg text-white font-medium course-detail-btn" data-course="ai-painting">
+                            了解详情
+                        </button>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+                <!-- Course 7: 光敏小印章 -->
+                <div class="course-card bg-white rounded-2xl overflow-hidden shadow-lg" 
+                     data-category="7-12" 
+                     data-course-id="photo-stamp">
+                    <div class="h-48 bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center">
+                        <img src="resources/光敏印章.jpg" alt="光敏小印章" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">光敏小印章</h3>
+                        <p class="text-gray-600 mb-4">艺术手帐和科技的完美结合，体验光化学反应的魅力</p>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>适合年龄：8-12岁</span>
+                            <span>课时：4课时</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>难度：入门</span>
+                             <span class="text-blue-600 font-medium">课时费：80元/课时 + 材料费：128元</span>
+                        </div>
+                        <button class="btn-primary w-full py-2 rounded-lg text-white font-medium course-detail-btn" data-course="photo-stamp">
+                            了解详情
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course 8: CyberBrick智能机器人 -->
+                <div class="course-card bg-white rounded-2xl overflow-hidden shadow-lg" 
+                     data-category="7-12" 
+                     data-course-id="cyberbrick">
+                    <div class="h-48 bg-gradient-to-br from-cyan-400 to-cyan-600 flex items-center justify-center" style="background-image: url('resources/CyberBrick.jpeg'); background-size: cover; background-position: center;">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">CyberBrick智能机器人</h3>
+                        <p class="text-gray-600 mb-4">模块化智能生态系统，像拼搭积木般享受3D打印和编程乐趣</p>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>适合年龄：6-8岁</span>
+                            <span>课时：8课时</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>难度：中阶</span>
+                            <span class="text-blue-600 font-medium">课时费：130元/课时 + 材料费：0元</span>
+                        </div>
+                        <button class="btn-primary w-full py-2 rounded-lg text-white font-medium course-detail-btn" data-course="cyberbrick">
+                            了解详情
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course 9: STEAM创意绘画 -->
+                <div class="course-card bg-white rounded-2xl overflow-hidden shadow-lg" 
+                     data-category="3-6" 
+                     data-course-id="steam-painting">
+                    <div class="h-48 bg-gradient-to-br from-violet-400 to-violet-600 flex items-center justify-center">
+                        <img src="resources/创意绘画封面.jpg" alt="STEAM创意绘画" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">STEAM创意绘画</h3>
+                        <p class="text-gray-600 mb-4">通过艺术连接科学、技术、工程、数学，达到创造性思维的提升</p>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>适合年龄：6-12岁</span>
+                            <span>课时：8课时</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>难度：入门</span>
+                            <span class="text-blue-600 font-medium">课时费：60元/课时 + 200元材料费</span>
+                        </div>
+                        <button class="btn-primary w-full py-2 rounded-lg text-white font-medium course-detail-btn" data-course="steam-painting">
+                            了解详情
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course 10: 舌尖上的上海 -->
+                <div class="course-card bg-white rounded-2xl overflow-hidden shadow-lg" 
+                     data-category="adult" 
+                     data-course-id="shanghai-food">
+                    <div class="h-48 bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center">
+                        <img src="resources/舌尖上的上海1.jpg" alt="舌尖上的上海" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">舌尖上的上海</h3>
+                        <p class="text-gray-600 mb-4">PBL教学载体，融合STEAM理念，发现生活中的复杂性和丰富性问题</p>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>适合年龄：6-8岁</span>
+                            <span>课时：8课时</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>难度：中阶</span>
+                             <span class="text-blue-600 font-medium">课时费：80元/课时 + 材料费：228元</span>
+                        </div>
+                        <button class="btn-primary w-full py-2 rounded-lg text-white font-medium course-detail-btn" data-course="shanghai-food">
+                            了解详情
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course 12: 木工课 -->
+                <div class="course-card bg-white rounded-2xl overflow-hidden shadow-lg" 
+                     data-category="7-12" 
+                     data-course-id="woodworking">
+                    <div class="h-48 bg-gradient-to-br from-amber-600 to-amber-800 flex items-center justify-center">
+                        <img src="resources/木工课.jpg" alt="小工匠创造营" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">小工匠创造营</h3>
+                        <p class="text-gray-600 mb-4">您家孩子爱拆东西？那是工程师天赋！我们把「拆家」变成「创造」，从锯子刨刀到榫卯结构，让孩子亲手把木头变成会动的玩具、能用的家具</p>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>适合年龄：7-14岁、成人</span>
+                            <span>课时：8课时</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>难度：中阶</span>
+                            <span class="text-blue-600 font-medium">课时费：80元/课时 + 材料费：500元</span>
+                        </div>
+                        <button class="btn-primary w-full py-2 rounded-lg text-white font-medium course-detail-btn" data-course="woodworking">
+                            了解详情
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course 13: 魔方课 -->
+                <div class="course-card bg-white rounded-2xl overflow-hidden shadow-lg" 
+                     data-category="7-12" 
+                     data-course-id="rubiks-cube">
+                    <div class="h-48 bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center">
+                        <img src="resources/魔方课.jpg" alt="指尖上的最强大脑" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">指尖上的最强大脑</h3>
+                        <p class="text-gray-600 mb-4">一个魔方=三维立体数学课+手脑协调训练+专注力特训！孩子从1小时拧不开到3分钟还原，练的是肌肉记忆，提升的是空间想象力和抗挫力</p>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>适合年龄：6-10岁</span>
+                            <span>课时：8课时</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>难度：入门</span>
+                            <span class="text-blue-600 font-medium">课时费：50元/课时 + 材料费：28元</span>
+                        </div>
+                        <button class="btn-primary w-full py-2 rounded-lg text-white font-medium course-detail-btn" data-course="rubiks-cube">
+                            了解详情
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course 14: 青少年无人机 -->
+                <div class="course-card bg-white rounded-2xl overflow-hidden shadow-lg" 
+                     data-category="13-18" 
+                     data-course-id="youth-drone">
+                    <div class="h-48 bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center">
+                        <img src="resources/neo无人机.png" alt="天空不设限，飞出新未来" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">天空不设限，飞出新未来</h3>
+                        <p class="text-gray-600 mb-4">课程对接全国青少年无人机大赛，掌握无人机的基本原理、组成部件、工作原理等基础知识，并通过实践训练使学生掌握无人机的遥控操作技能</p>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>适合年龄：10-18岁、成人</span>
+                            <span>课时：8课时</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>难度：高阶</span>
+                            <span class="text-blue-600 font-medium">课时费：199元/课时 </span>
+                        </div>
+                        <button class="btn-primary w-full py-2 rounded-lg text-white font-medium course-detail-btn" data-course="youth-drone">
+                            了解详情
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course 15: 大疆RoboMaster机甲大师赛 -->
+                <div class="course-card bg-white rounded-2xl overflow-hidden shadow-lg" 
+                     data-category="13-18" 
+                     data-course-id="robomaster">
+                    <div class="h-48 bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center">
+                        <img src="resources/机甲大师2.png" alt="大疆RoboMaster机甲大师赛" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">大疆RoboMaster机甲大师赛</h3>
+                        <p class="text-gray-600 mb-4">想让孩子站上国际舞台？大疆RoboMaster是全球最酷的机器人竞技赛！从零搭建机甲、编写视觉识别算法到团队战术配合，这是一门「准大学生机器人课程」</p>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>适合年龄：9-12岁</span>
+                            <span>课时：8课时</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>难度：入门</span>
+                            <span class="text-blue-600 font-medium">课时费：130元/课时 + 材料费：60元</span>
+                        </div>
+                        <button class="btn-primary w-full py-2 rounded-lg text-white font-medium course-detail-btn" data-course="robomaster">
+                            了解详情
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course 16: 幼儿编程（3-6岁） -->
+                <div class="course-card bg-white rounded-2xl overflow-hidden shadow-lg" 
+                     data-category="3-6" 
+                     data-course-id="toddler-coding">
+                    <div class="h-48 bg-gradient-to-br from-pink-500 to-pink-700 flex items-center justify-center">
+                        <img src="resources/少儿编程.png" alt="不玩平板，玩编程思维" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">不玩平板，玩编程思维</h3>
+                        <p class="text-gray-600 mb-4">用无屏幕实物编程模块+图形化软件，把抽象代码变成摸得着的积木。小猪佩奇过马路、小恐龙找妈妈……每个故事都是一节逻辑思维课</p>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>适合年龄：3-6岁</span>
+                            <span>课时：10课时</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>难度：入门</span>
+                            <span class="text-blue-600 font-medium">课时费：60元/课时 + 自带电脑</span>
+                        </div>
+                        <button class="btn-primary w-full py-2 rounded-lg text-white font-medium course-detail-btn" data-course="toddler-coding">
+                            了解详情
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course 17: 乐高-搭建（基础） -->
+                <div class="course-card bg-white rounded-2xl overflow-hidden shadow-lg" 
+                     data-category="3-6" 
+                     data-course-id="lego-basic">
+                    <div class="h-48 bg-gradient-to-br from-yellow-500 to-yellow-700 flex items-center justify-center">
+                        <img src="resources/乐高搭建.jpg" alt="乐高-搭建（基础）" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">乐高-搭建（基础）</h3>
+                        <p class="text-gray-600 mb-4">5000块乐高能搭出什么？一个孩子想象中的世界！从摩天大楼到旋转木马，我们教的不是「照图搭」，而是「解决问题」</p>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>适合年龄：4-8岁</span>
+                            <span>课时：8课时</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>难度：入门</span>
+                            <span class="text-blue-600 font-medium">课时费：60元/课时 + 材料费：0元</span>
+                        </div>
+                        <button class="btn-primary w-full py-2 rounded-lg text-white font-medium course-detail-btn" data-course="lego-basic">
+                            了解详情
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course 18: 3D打印建模 -->
+                <div class="course-card bg-white rounded-2xl overflow-hidden shadow-lg" 
+                     data-category="7-12" 
+                     data-course-id="3d-printing">
+                    <div class="h-48 bg-gradient-to-br from-indigo-600 to-indigo-800 flex items-center justify-center">
+                        <img src="resources/3D建模.png" alt="3D打印建模" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">3D打印建模</h3>
+                        <p class="text-gray-600 mb-4">孩子画在纸上的奇思妙想，我们可以「打印」出来！从Tinkercad入门到Fusion360进阶，学习3D建模核心技能，亲手设计手机支架、玩偶、机器人零件并打印成品</p>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>适合年龄：8-16岁、成人</span>
+                            <span>课时：12课时</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>难度：中阶</span>
+                            <span class="text-blue-600 font-medium">课时费：105元/课时 + 材料费：300元</span>
+                        </div>
+                        <button class="btn-primary w-full py-2 rounded-lg text-white font-medium course-detail-btn" data-course="3d-printing">
+                            了解详情
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course 19: 乐高-机械（进阶） -->
+                <div class="course-card bg-white rounded-2xl overflow-hidden shadow-lg" 
+                     data-category="7-12" 
+                     data-course-id="lego-mechanical">
+                    <div class="h-48 bg-gradient-to-br from-green-600 to-green-800 flex items-center justify-center">
+                        <img src="resources/乐高机械.png" alt="乐高-机械（进阶）" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">乐高-机械（进阶）</h3>
+                        <p class="text-gray-600 mb-4">杠杆、滑轮、齿轮、连杆……这些枯燥的物理名词，在乐高机械课里就是让孩子尖叫的魔法！搭建投篮机器人、抓物机械臂、风力发电机，理解真实机械原理</p>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>适合年龄：7-14岁</span>
+                            <span>课时：8课时</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>难度：中阶</span>
+                            <span class="text-blue-600 font-medium">课时费：60元/课时</span>
+                        </div>
+                        <button class="btn-primary w-full py-2 rounded-lg text-white font-medium course-detail-btn" data-course="lego-mechanical">
+                            了解详情
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course 20: 编程课-Scratch -->
+                <div class="course-card bg-white rounded-2xl overflow-hidden shadow-lg" 
+                     data-category="7-12" 
+                     data-course-id="scratch">
+                    <div class="h-48 bg-gradient-to-br from-orange-500 to-orange-700 flex items-center justify-center">
+                        <img src="resources/编程1.jpeg" alt="编程课-Scratch" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">编程课-Scratch</h3>
+                        <p class="text-gray-600 mb-4">孩子沉迷游戏？那就教他们「制造游戏」！Scratch图形化编程，拖拽积木就能做动画、编故事、设计小游戏。课程融合数学、艺术、音乐，培养计算思维和创意表达</p>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>适合年龄：7-10岁</span>
+                            <span>课时：8课时</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>难度：入门</span>
+                            <span class="text-blue-600 font-medium">课时费：60元/课时 + 自带电脑</span>
+                        </div>
+                        <button class="btn-primary w-full py-2 rounded-lg text-white font-medium course-detail-btn" data-course="scratch">
+                            了解详情
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course 21: 编程课-Python -->
+                <div class="course-card bg-white rounded-2xl overflow-hidden shadow-lg" 
+                     data-category="13-18" 
+                     data-course-id="python">
+                    <div class="h-48 bg-gradient-to-br from-blue-700 to-blue-900 flex items-center justify-center">
+                        <img src="resources/编程.png" alt="编程课-Python" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">编程课-Python</h3>
+                        <p class="text-gray-600 mb-4">小学四年级就能学真编程！Python是人工智能第一语言，我们的课程从海龟画图到数据分析，从爬虫到机器学习入门，直击CSP-J/S信奥赛考点</p>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>适合年龄：10-12岁</span>
+                            <span>课时：8课时</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>难度：中阶</span>
+                            <span class="text-blue-600 font-medium">课时费：60元/课时 + 自带电脑</span>
+                        </div>
+                        <button class="btn-primary w-full py-2 rounded-lg text-white font-medium course-detail-btn" data-course="python">
+                            了解详情
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course 23: 电子制作项目课程～焊接 -->
+                <div class="course-card bg-white rounded-2xl overflow-hidden shadow-lg" 
+                     data-category="13-18" 
+                     data-course-id="electronics-welding">
+                    <div class="h-48 bg-gradient-to-br from-gray-600 to-gray-800 flex items-center justify-center">
+                        <img src="resources/电子制作.png" alt="电子制作项目课程～焊接" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">电子制作项目课程～焊接</h3>
+                        <p class="text-gray-600 mb-4">你想孩子理解「智能」背后的原理吗？从认识电阻电容到亲手焊接电子徽章，每一道焊锡都是通向物联网世界的桥梁。专业工程师授课，恒温焊台+防烫措施，安全有保障</p>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>适合年龄：9-12岁</span>
+                            <span>课时：8课时</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>难度：中阶</span>
+                            <span class="text-blue-600 font-medium">课时费：80元/课时 + 材料费：360元</span>
+                        </div>
+                        <button class="btn-primary w-full py-2 rounded-lg text-white font-medium course-detail-btn" data-course="electronics-welding">
+                            了解详情
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course 28: VEX机器人编程 -->
+                <div class="course-card bg-white rounded-2xl overflow-hidden shadow-lg" 
+                     data-category="13-18" 
+                     data-course-id="vex-robotics">
+                    <div class="h-48 bg-gradient-to-br from-red-700 to-red-900 flex items-center justify-center">
+                        <img src="resources/VEX-2.jpg" alt="VEX机器人编程" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">VEX机器人编程</h3>
+                        <p class="text-gray-600 mb-4">VEX是全球参与最广泛的机器人竞赛，从IQ到V5，我们的课程体系完整对接。设计、搭建、编程、操控四位一体，每节课都在解决真实工程问题：如何让机械臂更精准？怎么让自动程序更稳定？</p>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>适合年龄：9-12岁</span>
+                            <span>课时：16课时</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>难度：高阶</span>
+                            <span class="text-blue-600 font-medium">课时费：130元/课时 + 材料费：0元</span>
+                        </div>
+                        <button class="btn-primary w-full py-2 rounded-lg text-white font-medium course-detail-btn" data-course="vex-robotics">
+                            了解详情
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course 27: 激光造物 -->
+                <div class="course-card bg-white rounded-2xl overflow-hidden shadow-lg" 
+                     data-category="13-18" 
+                     data-course-id="laser-creation">
+                    <div class="h-48 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
+                        <img src="resources/激光造物.jpg" alt="激光造物" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">激光造物</h3>
+                        <p class="text-gray-600 mb-4">精度0.1mm的激光切割机，让孩子的设计瞬间变成艺术品！从平面图案到立体榫卯，从亚克力灯牌到木质模型，学习CAD绘图、材料特性、安全操作。课程融合艺术设计与工程思维</p>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>适合年龄：10-16岁、成人</span>
+                            <span>课时：8课时</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>难度：高阶</span>
+                            <span class="text-blue-600 font-medium">课时费：80元/课时 + 材料费：300元</span>
+                        </div>
+                        <button class="btn-primary w-full py-2 rounded-lg text-white font-medium course-detail-btn" data-course="laser-creation">
+                            了解详情
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course 29: 科创项目课-物理应用 -->
+                <div class="course-card bg-white rounded-2xl overflow-hidden shadow-lg" 
+                     data-category="adult" 
+                     data-course-id="physics-application">
+                    <div class="h-48 bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center">
+                        <img src="resources/%E7%89%A9%E7%90%86.jpg" alt="科创项目课-物理应用" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">科创项目课-物理应用</h3>
+                        <p class="text-gray-600 mb-4">初中物理预学+科创竞赛双保险，用项目制把物理知识"演"出来，制作潜水艇模型理解浮力，搭建智能家居理解电路原理。</p>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>适合年龄：12-15岁</span>
+                            <span>课时：16课时</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>难度：中阶</span>
+                            <span class="text-blue-600 font-medium">课时费：80元/课时 + 材料费：300元</span>
+                        </div>
+                        <button class="btn-primary w-full py-2 rounded-lg text-white font-medium course-detail-btn" data-course="physics-application">
+                            了解详情
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course 30: AI+多学科融合 -->
+                <div class="course-card bg-white rounded-2xl overflow-hidden shadow-lg" 
+                     data-category="adult" 
+                     data-course-id="ai-multidisciplinary">
+                    <div class="h-48 bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center">
+                        <img src="resources/AI%2B.png" alt="AI+多学科融合" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">AI+多学科融合</h3>
+                        <p class="text-gray-600 mb-4">面向未来的跨学科课程，用AI工具学英语、做数学题、写科幻小说，培养"会提问、会协作、会创造"的AI原住民。</p>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>适合年龄：10-16岁、成人</span>
+                            <span>课时：12课时</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>难度：中阶</span>
+                            <span class="text-blue-600 font-medium">课时费：60元/课时 + 自带电脑</span>
+                        </div>
+                        <button class="btn-primary w-full py-2 rounded-lg text-white font-medium course-detail-btn" data-course="ai-multidisciplinary">
+                            了解详情
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course 31: "仿生蝴蝶"科创 -->
+                <div class="course-card bg-white rounded-2xl overflow-hidden shadow-lg" 
+                     data-category="adult" 
+                     data-course-id="bionic-butterfly">
+                    <div class="h-48 bg-gradient-to-br from-green-600 to-green-800 flex items-center justify-center">
+                        <img src="resources/%E4%BB%BF%E7%94%9F%E8%9D%B4%E8%9D%B6.png" alt="仿生蝴蝶科创" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">"仿生蝴蝶"科创</h3>
+                        <p class="text-gray-600 mb-4">掌握仿生学基本原理，理解扑翼飞行气动差异，学习电子基础知识和3D打印工艺，完成仿生蝴蝶组装与调试。</p>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>适合年龄：12-18岁</span>
+                            <span>课时：20课时</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>难度：高阶</span>
+                            <span class="text-blue-600 font-medium">课时费：199元 + 材料费：1580元</span>
+                        </div>
+                        <button class="btn-primary w-full py-2 rounded-lg text-white font-medium course-detail-btn" data-course="bionic-butterfly">
+                            了解详情
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course 32: 3D打印笔+纸电路 -->
+                <div class="course-card bg-white rounded-2xl overflow-hidden shadow-lg" 
+                     data-category="adult" 
+                     data-course-id="3d-print-paper-circuit">
+                    <div class="h-48 bg-gradient-to-br from-indigo-600 to-indigo-800 flex items-center justify-center">
+                        <img src="resources/3D%E6%89%93%E5%8D%B0%E7%AC%94%E7%BA%B8%E7%94%B5%E8%B7%AF.png" alt="3D打印笔+纸电路" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">3D打印笔+纸电路</h3>
+                        <p class="text-gray-600 mb-4">STEM教育最新趋势，"硬科技软着落"理念，将复杂电子原理转化为可视化、可触摸的创意实践。</p>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>适合年龄：6-10岁</span>
+                            <span>课时：8课时</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>难度：入门</span>
+                            <span class="text-blue-600 font-medium">课时费：60元/课时 + 材料费：280元</span>
+                        </div>
+                        <button class="btn-primary w-full py-2 rounded-lg text-white font-medium course-detail-btn" data-course="3d-print-paper-circuit">
+                            了解详情
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course 33: 火柴人可视化思维 -->
+                <div class="course-card bg-white rounded-2xl overflow-hidden shadow-lg" 
+                     data-category="adult" 
+                     data-course-id="stickman-thinking">
+                    <div class="h-48 bg-gradient-to-br from-pink-600 to-pink-800 flex items-center justify-center">
+                        <img src="resources/可视化思维.png" alt="火柴人可视化思维" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">火柴人可视化思维</h3>
+                        <p class="text-gray-600 mb-4">通过绘画的方式打开思路，培养批判性思考、沟通协作、创造革新等综合能力，为未来做好充分准备。</p>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>适合年龄：8-14岁</span>
+                            <span>课时：12课时</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-500 mb-4">
+                            <span>难度：中阶</span>
+                            <span class="text-blue-600 font-medium">课时费：90元 + 材料费：180元</span>
+                        </div>
+                        <button class="btn-primary w-full py-2 rounded-lg text-white font-medium course-detail-btn" data-course="stickman-thinking">
+                            了解详情
+                        </button>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Process -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="section-title text-3xl md:text-4xl font-bold mb-4">服务流程</h2>
+                <p class="text-xl text-gray-600">从咨询到参与的完整服务体验</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-bold text-blue-600">1</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">咨询了解</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        通过电话、微信或现场咨询，了解课程详情和适合的课程推荐
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-bold text-orange-600">2</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">预约报名</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        选择合适的课程时间，完成报名手续和缴费
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-bold text-green-600">3</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">参与学习</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        在专业教师指导下，参与课程学习和实践操作
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-bold text-purple-600">4</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">成果展示</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        完成作品制作，参与成果展示和分享活动
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="section-title text-3xl md:text-4xl font-bold mb-4">收费标准</h2>
+                <p class="text-xl text-gray-600">公益性定价，让科技教育触手可及</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-2xl p-8 shadow-lg text-center border-2 border-gray-200">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">入门课程</h3>
+                    <div class="text-4xl font-bold text-blue-600 mb-6">380-580元</div>
+                    <ul class="text-gray-600 space-y-3 mb-8">
+                        <li>• 适合3-8岁初学者</li>
+                        <li>• 6-10课时</li>
+                        <li>• 基础材料包含</li>
+                        <li>• 专业教师指导</li>
+                    </ul>
+                    <button class="w-full py-3 border-2 border-blue-600 text-blue-600 rounded-lg font-semibold hover:bg-blue-600 hover:text-white transition-colors">
+                        了解详情
+                    </button>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-8 shadow-lg text-center border-2 border-blue-600 relative">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-medium">
+                        推荐
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">进阶课程</h3>
+                    <div class="text-4xl font-bold text-blue-600 mb-6">680-880元</div>
+                    <ul class="text-gray-600 space-y-3 mb-8">
+                        <li>• 适合7-15岁学习者</li>
+                        <li>• 8-12课时</li>
+                        <li>• 专业设备使用</li>
+                        <li>• 项目作品制作</li>
+                    </ul>
+                    <button class="w-full py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                        了解详情
+                    </button>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-8 shadow-lg text-center border-2 border-gray-200">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">高阶课程</h3>
+                    <div class="text-4xl font-bold text-blue-600 mb-6">980-1280元</div>
+                    <ul class="text-gray-600 space-y-3 mb-8">
+                        <li>• 适合12-18岁学习者</li>
+                        <li>• 12-16课时</li>
+                        <li>• 高级材料套装</li>
+                        <li>• 竞赛指导服务</li>
+                    </ul>
+                    <button class="w-full py-3 border-2 border-blue-600 text-blue-600 rounded-lg font-semibold hover:bg-blue-600 hover:text-white transition-colors">
+                        了解详情
+                    </button>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <p class="text-gray-600 mb-4">
+                    * 所有课程费用包含教材费、材料费和设备使用费
+                </p>
+                <p class="text-gray-600">
+                    * 困难家庭可申请公益补助，具体咨询工作人员
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Detail Modal -->
+    <div id="course-modal" class="course-modal">
+        <div class="bg-white rounded-2xl max-w-4xl w-full mx-4 max-h-screen overflow-y-auto">
+            <div class="p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 id="modal-title" class="text-3xl font-bold text-gray-900"></h2>
+                    <button id="close-modal" class="text-gray-400 hover:text-gray-600">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div id="modal-content" class="space-y-6">
+                    <!-- Modal content will be populated by JavaScript -->
+                </div>
+                <div class="flex gap-4 mt-8">
+                    <a href="contact.html" class="btn-primary px-8 py-3 rounded-lg text-white font-semibold">
+                        立即预约
+                    </a>
+                    <button id="close-modal-btn" class="border-2 border-gray-300 px-8 py-3 rounded-lg text-gray-600 font-semibold hover:bg-gray-50">
+                        关闭
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center mb-4">
+                    <img src="resources/logo.png" alt="因未创新" class="h-8 w-auto mr-3">
+                    <span class="text-xl font-bold">因未创新</span>
+                </div>
+                <p class="text-gray-400 mb-4">
+                    上海浦东因未创新文化服务中心 - 让科技创新温暖每一个社区
+                </p>
+                <p class="text-gray-500 text-sm">
+                    © 2025 因未创新文化服务中心. 保留所有权利.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

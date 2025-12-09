@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联系我们 - 因未创新</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #f97316;
+            --text-color: #1f2937;
+            --bg-color: #fefefe;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+        
+        .section-title {
+            font-family: 'Noto Serif SC', serif;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .contact-card {
+            transition: all 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .form-input {
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+        
+        .success-message {
+            display: none;
+            background: #10b981;
+            color: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-sm z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <img src="resources/logo.png" alt="因未创新" class="h-10 w-auto">
+                    <span class="ml-3 text-xl font-bold text-gray-900">因未创新</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="nav-link text-gray-600 hover:text-gray-900 font-medium">首页</a>
+                        <a href="about.html?v=20251208" class="nav-link text-gray-600 hover:text-gray-900 font-medium">关于我们</a>
+                        <a href="services.html" class="nav-link text-gray-600 hover:text-gray-900 font-medium">服务项目</a>
+                        <a href="achievements.html" class="nav-link text-gray-600 hover:text-gray-900 font-medium">最新资讯</a>
+                        <a href="contact.html" class="nav-link text-gray-900 font-medium">联系我们</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-gray-900">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-gray-600 hover:text-gray-900">首页</a>
+                <a href="about.html?v=20251208" class="block px-3 py-2 text-gray-600 hover:text-gray-900">关于我们</a>
+                <a href="services.html" class="block px-3 py-2 text-gray-600 hover:text-gray-900">服务项目</a>
+                <a href="achievements.html" class="block px-3 py-2 text-gray-600 hover:text-gray-900">最新资讯</a>
+                <a href="contact.html" class="block px-3 py-2 text-gray-900 font-medium">联系我们</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-blue-50 to-orange-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="section-title text-4xl md:text-5xl font-bold mb-6">联系我们</h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    欢迎与我们取得联系，让我们一起为社区科技教育事业贡献力量
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Information -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <div class="contact-card bg-gray-50 rounded-2xl p-8 text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">联系电话</h3>
+                    <p class="text-gray-600 text-lg" data-contact-phone="19921382550创客来吧小客服">19921382550创客来吧小客服</p>
+                    <p class="text-gray-500 text-sm mt-2">工作时间：周三至周日9:30-17:30</p>
+                </div>
+                
+                <div class="contact-card bg-gray-50 rounded-2xl p-8 text-center">
+                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">邮箱地址</h3>
+                    <p class="text-gray-600 text-lg" data-contact-email="infuture123@163.com">infuture123@163.com</p>
+                    <p class="text-gray-500 text-sm mt-2">24小时内回复您的咨询</p>
+                </div>
+                
+                <div class="contact-card bg-gray-50 rounded-2xl p-8 text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">办公地址</h3>
+                    <p class="text-gray-600 text-lg" data-contact-address="上海市浦东新区昌邑路699号三楼">上海市浦东新区昌邑路699号三楼</p>
+                    <p class="text-gray-500 text-sm mt-2">陆家嘴街道社区创新屋</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="section-title text-3xl md:text-4xl font-bold mb-4">在线预约</h2>
+                <p class="text-xl text-gray-600">填写表单，我们将在24小时内与您联系</p>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-8 shadow-lg">
+                <div id="success-message" class="success-message">
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        预约提交成功！我们将在24小时内与您联系。
+                    </div>
+                </div>
+                
+                <form id="contact-form" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="parent-name" class="block text-sm font-medium text-gray-700 mb-2">家长姓名 *</label>
+                            <input type="text" id="parent-name" name="parent-name" required 
+                                   class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none">
+                        </div>
+                        <div>
+                            <label for="child-name" class="block text-sm font-medium text-gray-700 mb-2">孩子姓名 *</label>
+                            <input type="text" id="child-name" name="child-name" required 
+                                   class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none">
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">联系电话 *</label>
+                            <input type="tel" id="phone" name="phone" required 
+                                   class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">邮箱地址</label>
+                            <input type="email" id="email" name="email" 
+                                   class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none">
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="child-age" class="block text-sm font-medium text-gray-700 mb-2">孩子年龄 *</label>
+                            <select id="child-age" name="child-age" required 
+                                    class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none">
+                                <option value="">请选择年龄段</option>
+                                <option value="3-5">3-5岁</option>
+                                <option value="6-8">6-8岁</option>
+                                <option value="9-12">9-12岁</option>
+                                <option value="13-15">13-15岁</option>
+                                <option value="16-18">16-18岁</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="course-interest" class="block text-sm font-medium text-gray-700 mb-2">感兴趣的课程 *</label>
+                            <select id="course-interest" name="course-interest" required 
+                                    class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none">
+                                <option value="">请选择课程类型</option>
+                                <option value="drone">无人机智造</option>
+                                <option value="ai-painting">AI创意绘画</option>
+                                <option value="robot">鲸鱼机器人</option>
+                                <option value="rubiks-cube">魔方课程</option>
+                                <option value="lego">乐高机械</option>
+                                <option value="electronics">电子制作</option>
+                                <option value="other">其他课程</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="preferred-time" class="block text-sm font-medium text-gray-700 mb-2">期望时间</label>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <label class="flex items-center">
+                                <input type="checkbox" name="preferred-time" value="weekday-morning" class="mr-2">
+                                <span class="text-sm">工作日上午</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" name="preferred-time" value="weekday-afternoon" class="mr-2">
+                                <span class="text-sm">工作日下午</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" name="preferred-time" value="weekend-morning" class="mr-2">
+                                <span class="text-sm">周末上午</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" name="preferred-time" value="weekend-afternoon" class="mr-2">
+                                <span class="text-sm">周末下午</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700 mb-2">其他需求或问题</label>
+                        <textarea id="message" name="message" rows="4" 
+                                  class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none" 
+                                  placeholder="请告诉我们您的特殊需求或想了解的问题..."></textarea>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <input type="checkbox" id="privacy-agree" name="privacy-agree" required class="mr-3">
+                        <label for="privacy-agree" class="text-sm text-gray-600">
+                            我已阅读并同意 <a href="#" class="text-blue-600 hover:text-blue-800">隐私政策</a> 和 <a href="#" class="text-blue-600 hover:text-blue-800">服务条款</a>
+                        </label>
+                    </div>
+                    
+                    <div class="text-center">
+                        <button type="submit" class="btn-primary px-8 py-3 rounded-lg text-white font-semibold">
+                            提交预约
+                        </button>
+                        <p class="text-sm text-gray-500 mt-2">
+                            表单将发送至：infuture123@163.com
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Hours & Location -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="section-title text-3xl font-bold mb-8">服务时间</h2>
+                    <div class="bg-gray-50 rounded-2xl p-8">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center py-3 border-b border-gray-200">
+                                <span class="font-medium text-gray-900">周三至周五</span>
+                                <span class="text-gray-600">9:30-17:30</span>
+                            </div>
+                            <div class="flex justify-between items-center py-3 border-b border-gray-200">
+                                <span class="font-medium text-gray-900">周六</span>
+                                <span class="text-gray-600">9:30-17:30</span>
+                            </div>
+                            <div class="flex justify-between items-center py-3 border-b border-gray-200">
+                                <span class="font-medium text-gray-900">周日</span>
+                                <span class="text-gray-600">10:00 - 15:00</span>
+                            </div>
+                            <div class="flex justify-between items-center py-3">
+                                <span class="font-medium text-gray-900">节假日</span>
+                                <span class="text-gray-600">请提前咨询</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 p-4 bg-blue-50 rounded-lg">
+                            <h4 class="font-bold text-blue-900 mb-2">温馨提示</h4>
+                            <ul class="text-sm text-blue-800 space-y-1">
+                                <li>• 建议提前预约，避免等待</li>
+                                <li>• 课程时间可能因季节调整</li>
+                                <li>• 节假日期间请提前确认</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h2 class="section-title text-3xl font-bold mb-8">交通指南</h2>
+                    <div class="bg-gray-50 rounded-2xl p-8">
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-3">地铁线路</h4>
+                                <p class="text-gray-600 mb-2">
+                                    <span class="inline-block bg-red-500 text-white px-2 py-1 rounded text-sm mr-2">2号线</span>
+                                    陆家嘴站下车，步行约8分钟
+                                </p>
+                                <p class="text-gray-600">
+                                    <span class="inline-block bg-blue-500 text-white px-2 py-1 rounded text-sm mr-2">4号线</span>
+                                    浦东大道站下车，步行约10分钟
+                                </p>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-3">公交线路</h4>
+                                <p class="text-gray-600 mb-2">81路、85路、799路、993路</p>
+                                <p class="text-gray-600">昌邑路东方路站下车</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 p-4 bg-orange-50 rounded-lg">
+                            <h4 class="font-bold text-orange-900 mb-2">停车信息</h4>
+                            <ul class="text-sm text-orange-800 space-y-1">
+                                <li>• 社区创新屋无专用停车场</li>
+                                <li>• 建议使用公共交通</li>
+                                <li>• 周边小区可付费停车</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- QR Code Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="section-title text-3xl md:text-4xl font-bold mb-4">关注我们</h2>
+                <p class="text-xl text-gray-600">扫码关注公众号，获取最新活动信息</p>
+            </div>
+            
+            <div class="flex justify-center">
+                <div class="bg-white rounded-2xl p-8 shadow-lg text-center">
+                    <div class="w-48 h-48 bg-gray-200 rounded-lg mx-auto mb-6 flex items-center justify-center">
+                        <img src="resources/my-qrcode.jpg" alt="因未创新公众号二维码" class="w-full h-full object-contain rounded-lg">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">因未创新公众号</h3>
+                    <p class="text-gray-600">扫码关注，获取最新资讯</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center mb-4">
+                    <img src="resources/logo.png" alt="因未创新" class="h-8 w-auto mr-3">
+                    <span class="text-xl font-bold">因未创新</span>
+                </div>
+                <p class="text-gray-400 mb-4">
+                    上海浦东因未创新文化服务中心 - 让科技创新温暖每一个社区
+                </p>
+                <div class="flex justify-center space-x-6 mb-4">
+                    <a href="tel:021-12345678" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                        </svg>
+                    </a>
+                    <a href="mailto:info@yinwei.org" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </a>
+                </div>
+                <p class="text-gray-500 text-sm">
+                    © 2025 因未创新文化服务中心. 保留所有权利.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

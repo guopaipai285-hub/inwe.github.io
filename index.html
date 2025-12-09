@@ -1,0 +1,548 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>因未创新 - 让科技创新温暖每一个社区</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&amp;family=Noto+Sans+SC:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #f97316;
+            --text-color: #1f2937;
+            --bg-color: #fefefe;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+        
+        .hero-title {
+            font-family: 'Noto Serif SC', serif;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .stats-number {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .course-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .course-card:hover {
+            border-color: var(--primary-color);
+            transform: scale(1.02);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+        
+        .hero-bg {
+            background-image: url('resources/hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* 轮播组件样式 */
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 100%;
+        }
+        
+        .carousel-slide {
+            flex-shrink: 0;
+            width: 100%;
+            position: relative;
+        }
+        
+        .carousel-slide img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+        
+        .carousel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 20px;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+        
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.9);
+            color: var(--primary-color);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            opacity: 0.8;
+        }
+        
+        .carousel-nav:hover {
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            opacity: 1;
+        }
+        
+        .carousel-prev {
+            left: 10px;
+        }
+        
+        .carousel-next {
+            right: 10px;
+        }
+        
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 16px;
+        }
+        
+        .carousel-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #d1d5db;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-indicator:hover {
+            background-color: rgba(255, 255, 255, 0.9) !important;
+        }
+        
+        .carousel-indicator.active {
+            background: var(--primary-color);
+            transform: scale(1.2);
+        }
+        
+        .carousel-section {
+            position: relative;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-sm z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <img src="resources/logo.png" alt="因未创新" class="h-10 w-auto"/>
+                    <span class="ml-3 text-xl font-bold text-gray-900">因未创新</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="nav-link text-gray-900 font-medium">首页</a>
+                        <a href="about.html?v=20251208" class="nav-link text-gray-600 hover:text-gray-900 font-medium">关于我们</a>
+                        <a href="services.html" class="nav-link text-gray-600 hover:text-gray-900 font-medium">服务项目</a>
+                        <a href="achievements.html" class="nav-link text-gray-600 hover:text-gray-900 font-medium">最新资讯</a>
+                        <a href="contact.html" class="nav-link text-gray-600 hover:text-gray-900 font-medium">联系我们</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-gray-900">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-gray-900 font-medium">首页</a>
+                <a href="about.html?v=20251208" class="block px-3 py-2 text-gray-600 hover:text-gray-900">关于我们</a>
+                <a href="services.html" class="block px-3 py-2 text-gray-600 hover:text-gray-900">服务项目</a>
+                <a href="achievements.html" class="block px-3 py-2 text-gray-600 hover:text-gray-900">最新资讯</a>
+                <a href="contact.html" class="block px-3 py-2 text-gray-600 hover:text-gray-900">联系我们</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center justify-center relative" style="background-image: url(&#39;resources/hero-bg-new.jpg&#39;);">
+        <div class="absolute inset-0 bg-black/40"></div>
+        <div class="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 text-white leading-tight" data-hero-title="让科技创新温暖每一个社区">
+                让科技创新温暖每一个社区
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 opacity-95 text-gray-100" data-hero-subtitle="上海浦东因未创新文化服务中心 - 专注社区科技教育与创新普及">
+                上海浦东因未创新文化服务中心
+                <span class="block text-lg md:text-xl mt-2 opacity-90">专注社区科技教育与创新普及</span>
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="services.html" class="btn-primary inline-block px-8 py-4 rounded-full text-white font-semibold text-lg" data-hero-button="探索我们的服务">
+                    探索我们的服务
+                </a>
+                <a href="#features" class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-gray-900 transition-colors" onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'}); return false;">
+                    了解更多
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-gradient-to-br from-blue-50 via-white to-orange-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">我们的服务特色</h2>
+                <p class="text-lg text-gray-600 mb-10 max-w-2xl mx-auto">深耕社区科技教育，打造创新生态，为不同年龄段提供定制化解决方案</p>
+                
+                <div class="max-w-6xl mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- 特色1: 市级创新实验室 -->
+                        <div class="feature-item bg-white rounded-2xl shadow-lg p-8 relative overflow-hidden group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-blue-100 rounded-full transform translate-x-16 -translate-y-16 opacity-70 group-hover:scale-110 transition-transform duration-500"></div>
+                            <div class="relative z-10 flex items-start">
+                                <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center mr-6 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                                    </svg>
+                                </div>
+                                <div class="flex-1 text-left">
+                                    <h3 class="text-xl font-bold text-gray-900 mb-2">特色市级创新实验室</h3>
+                                    <p class="text-gray-600 leading-relaxed">提供全方位创新实验室建设解决方案，打造前沿科技教育空间，激发创新思维，培养未来科技人才</p>
+                                    <div class="mt-4 flex items-center text-blue-600 text-sm font-medium">
+                                        <a href="https://mp.weixin.qq.com/s/mOlWCqnj9KewSMJnQiZs9w" target="_blank" class="flex items-center hover:underline">
+                                            <span>了解更多</span>
+                                            <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 特色2: 科学妈妈社区 -->
+                        <div class="feature-item bg-white rounded-2xl shadow-lg p-8 relative overflow-hidden group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                            <div class="absolute top-0 left-0 w-32 h-32 bg-purple-100 rounded-full transform -translate-x-16 -translate-y-16 opacity-70 group-hover:scale-110 transition-transform duration-500"></div>
+                            <div class="relative z-10 flex items-start">
+                                <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl flex items-center justify-center mr-6 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                                    </svg>
+                                </div>
+                                <div class="flex-1 text-left">
+                                    <h3 class="text-xl font-bold text-gray-900 mb-2">科学妈妈社区</h3>
+                                    <p class="text-gray-600 leading-relaxed">打造上海市首个由浦东新区妇联主导的社区示范样板，推动女性在科技领域的参与与发展</p>
+                                    <div class="mt-4 flex items-center text-purple-600 text-sm font-medium">
+                                        <a href="https://mp.weixin.qq.com/s/WRlNeqTFzZI_EDWhY8ww0Q" target="_blank" class="flex items-center hover:underline">
+                                            <span>了解更多</span>
+                                            <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 特色3: 科普活动 -->
+                        <div class="feature-item bg-white rounded-2xl shadow-lg p-8 relative overflow-hidden group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                            <div class="absolute bottom-0 right-0 w-32 h-32 bg-orange-100 rounded-full transform translate-x-16 translate-y-16 opacity-70 group-hover:scale-110 transition-transform duration-500"></div>
+                            <div class="relative z-10 flex items-start">
+                                <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl flex items-center justify-center mr-6 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                    </svg>
+                                </div>
+                                <div class="flex-1 text-left">
+                                    <h3 class="text-xl font-bold text-gray-900 mb-2">专业科普活动</h3>
+                                    <p class="text-gray-600 leading-relaxed">专业科普活动策划和执行，丰富多样的科普活动，激发科学兴趣，培养科学素养</p>
+                                    <div class="mt-4 flex items-center text-orange-600 text-sm font-medium">
+                                        <a href="https://mp.weixin.qq.com/s/ysSuRQwL5GSrhMJdpEKM1g" target="_blank" class="flex items-center hover:underline">
+                                            <span>了解更多</span>
+                                            <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 特色4: AI创业孵化器 -->
+                        <div class="feature-item bg-white rounded-2xl shadow-lg p-8 relative overflow-hidden group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                            <div class="absolute bottom-0 left-0 w-32 h-32 bg-green-100 rounded-full transform -translate-x-16 translate-y-16 opacity-70 group-hover:scale-110 transition-transform duration-500"></div>
+                            <div class="relative z-10 flex items-start">
+                                <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-2xl flex items-center justify-center mr-6 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                    </svg>
+                                </div>
+                                <div class="flex-1 text-left">
+                                    <h3 class="text-xl font-bold text-gray-900 mb-2">AI创业孵化器</h3>
+                                    <p class="text-gray-600 leading-relaxed">人工智能创业孵化器，培养AI创新人才，助力创业梦想，打造AI创新生态系统</p>
+                                    <div class="mt-4 flex items-center text-green-600 text-sm font-medium">
+                                        <a href="https://mp.weixin.qq.com/s/NSLoIW7LZI8obtuzQD0yVQ" target="_blank" class="flex items-center hover:underline">
+                                            <span>了解更多</span>
+                                            <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="feature-card bg-white rounded-2xl p-8 text-center shadow-lg relative overflow-hidden" data-title="科技创新" data-description="前沿科技课程，激发创新思维，培养未来人才">
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-blue-100 rounded-full transform translate-x-10 -translate-y-10"></div>
+                    <div class="relative z-10">
+                        <div class="w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 transform rotate-3 hover:rotate-0 transition-transform duration-300">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">科技创新</h3>
+                        <p class="text-gray-600 leading-relaxed mb-6">基于2家市级创新实验室，自主研发24门课程总计960课时，覆盖K12全段综合素养需求</p>
+                        <div class="flex flex-col space-y-2 mt-4">
+                            <a href="https://mp.weixin.qq.com/s/72rhi9EDAj1SQVxq2pX5lA" target="_blank" class="btn-primary px-4 py-2 rounded-lg text-white text-sm font-medium text-center">
+                                陆家嘴街道社区创新屋
+                            </a>
+                            <a href="https://mp.weixin.qq.com/s/FZk-OH6SHEHysA5NGjc2Aw" target="_blank" class="btn-primary px-4 py-2 rounded-lg text-white text-sm font-medium text-center">
+                                塘桥街道社区创新屋
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="feature-card bg-white rounded-2xl p-8 text-center shadow-lg relative overflow-hidden" data-title="社区服务" data-description="深入社区，服务家庭，打造科技教育生态圈">
+                    <div class="absolute top-0 left-0 w-20 h-20 bg-orange-100 rounded-full transform -translate-x-10 -translate-y-10"></div>
+                    <div class="relative z-10">
+                        <div class="w-20 h-20 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-6 transform -rotate-3 hover:rotate-0 transition-transform duration-300">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">社区服务</h3>
+                        <p class="text-gray-600 leading-relaxed mb-6">构建覆盖3-75岁全生命周期的科普体系，形成&#34;上楼做3D打印、下楼飞无人机&#34;的社区共生场景</p>
+                        <div class="flex justify-center space-x-4 text-sm text-orange-600">
+                            <span class="bg-orange-50 px-3 py-1 rounded-full">全龄融通</span>
+                            <span class="bg-orange-50 px-3 py-1 rounded-full">社区共治</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="feature-card bg-white rounded-2xl p-8 text-center shadow-lg relative overflow-hidden" data-title="公益普及" data-description="公益性定价，让每个家庭都能享受优质科技教育">
+                    <div class="absolute bottom-0 right-0 w-20 h-20 bg-green-100 rounded-full transform translate-x-10 translate-y-10"></div>
+                    <div class="relative z-10">
+                        <div class="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6 transform rotate-2 hover:rotate-0 transition-transform duration-300">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">公益普及</h3>
+                        <p class="text-gray-600 leading-relaxed mb-6">坚持公益性定价策略，让每个家庭都能负担得起优质的科技教育，真正实现科技教育的普及化和公平化</p>
+                        <div class="flex justify-center space-x-4 text-sm text-green-600">
+                            <span class="bg-green-50 px-3 py-1 rounded-full">公益定价</span>
+                            <span class="bg-green-50 px-3 py-1 rounded-full">教育公平</span>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </section>
+
+
+    <!-- Lab Equipment Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">实验室装备实况</h2>
+                <p class="text-xl text-gray-600">先进的实验室设备，为创新教育提供强大支持</p>
+            </div>
+            
+            <div class="relative overflow-hidden rounded-2xl shadow-2xl" id="lab-carousel">
+                <div class="flex carousel-container" id="labCarousel">
+                    <div class="carousel-slide min-w-full">
+                        <img src="resources/激光切割机介绍.png" alt="激光切割机" class="w-full h-96 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">激光切割机</h3>
+                            <p class="text-white/80">高精度激光切割设备，支持多种材料加工</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide min-w-full">
+                        <img src="resources/CNC雕刻机.png" alt="CNC雕刻机" class="w-full h-96 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">CNC雕刻机</h3>
+                            <p class="text-white/80">精密数控雕刻设备，实现复杂形状加工</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide min-w-full">
+                        <img src="resources/电动工具介绍.png" alt="电动工具" class="w-full h-96 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">电动工具</h3>
+                            <p class="text-white/80">专业级电动工具套装，满足各种制作需求</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide min-w-full">
+                        <img src="resources/实验室环境1.JPG" alt="实验室环境1" class="w-full h-96 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">实验室环境</h3>
+                            <p class="text-white/80">宽敞明亮的创新实验空间</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide min-w-full">
+                        <img src="resources/实验室环境2.JPG" alt="实验室环境2" class="w-full h-96 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">多功能工作区</h3>
+                            <p class="text-white/80">配备多种设备的多功能创作空间</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide min-w-full">
+                        <img src="resources/实验室环境4.JPG" alt="实验室环境4" class="w-full h-96 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">专业设备区</h3>
+                            <p class="text-white/80">专业级设备区域，支持高精度制作</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide min-w-full">
+                        <img src="resources/实验室环境5.JPG" alt="实验室环境5" class="w-full h-96 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">展示交流区</h3>
+                            <p class="text-white/80">作品展示与交流分享的专属区域</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 轮播控制按钮 -->
+                <button class="carousel-prev absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 shadow-lg transition-all">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </button>
+                <button class="carousel-next absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 shadow-lg transition-all">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+                
+                <!-- 轮播指示器 -->
+                <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2" id="carouselIndicators">
+                    <button class="w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-colors" data-slide="0"></button>
+                    <button class="w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-colors" data-slide="1"></button>
+                    <button class="w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-colors" data-slide="2"></button>
+                    <button class="w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-colors" data-slide="3"></button>
+                    <button class="w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-colors" data-slide="4"></button>
+                    <button class="w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-colors" data-slide="5"></button>
+                    <button class="w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-colors" data-slide="6"></button>
+                </div>
+            </div>
+            
+
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-blue-600 to-orange-600">
+        <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                加入我们，开启科技创新之旅
+            </h2>
+            <p class="text-xl text-white/90 mb-8">
+                让每个孩子都能享受科技创新的乐趣，培养面向未来的核心竞争力
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="contact.html" class="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
+                    立即咨询
+                </a>
+                <a href="services.html" class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-blue-600 transition-colors">
+                    查看课程
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center mb-4">
+                    <img src="resources/logo.png" alt="因未创新" class="h-8 w-auto mr-3"/>
+                    <span class="text-xl font-bold">因未创新</span>
+                </div>
+                <p class="text-gray-400 mb-4">
+                    上海浦东因未创新文化服务中心 - 让科技创新温暖每一个社区
+                </p>
+                <p class="text-gray-500 text-sm">
+                    © 2025 因未创新文化服务中心. 保留所有权利.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+
+</body></html>

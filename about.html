@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我们 - 因未创新</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #f97316;
+            --text-color: #1f2937;
+            --bg-color: #fefefe;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+        
+        .section-title {
+            font-family: 'Noto Serif SC', serif;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .timeline-item {
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-item:hover {
+            transform: translateX(8px);
+        }
+        
+        .value-card {
+            transition: all 0.3s ease;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-sm z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <img src="resources/logo.png" alt="因未创新" class="h-10 w-auto">
+                    <span class="ml-3 text-xl font-bold text-gray-900">因未创新</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="nav-link text-gray-600 hover:text-gray-900 font-medium">首页</a>
+                        <a href="about.html" class="nav-link text-gray-900 font-medium">关于我们</a>
+                        <a href="services.html" class="nav-link text-gray-600 hover:text-gray-900 font-medium">服务项目</a>
+                        <a href="achievements.html" class="nav-link text-gray-600 hover:text-gray-900 font-medium">最新资讯</a>
+                        <a href="contact.html" class="nav-link text-gray-600 hover:text-gray-900 font-medium">联系我们</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-gray-900">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-gray-600 hover:text-gray-900">首页</a>
+                <a href="about.html" class="block px-3 py-2 text-gray-900 font-medium">关于我们</a>
+                <a href="services.html" class="block px-3 py-2 text-gray-600 hover:text-gray-900">服务项目</a>
+                <a href="achievements.html" class="block px-3 py-2 text-gray-600 hover:text-gray-900">最新资讯</a>
+                <a href="contact.html" class="block px-3 py-2 text-gray-600 hover:text-gray-900">联系我们</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-blue-50 to-orange-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="section-title text-4xl md:text-5xl font-bold mb-6">关于我们</h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    致力于将科技创新融入社区服务，让每个家庭成员都能享受科技带来的乐趣与成长
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Organization Introduction -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="section-title text-3xl font-bold mb-6">组织简介</h2>
+                    <div class="space-y-6 text-gray-600 leading-relaxed" data-org-intro>
+                        <p>
+                            上海浦东因未创新文化服务中心是一家致力于服务社区文化的创新型组织，是终身学习的公共资源平台。
+                            我们通过组建、研发、实践、孵化来促进社区发展，实现Learning Community对终身学习者的赋能。
+                        </p>
+                        <p>
+                            因未的运营模式"学习共同体、课程创新研发、教师培训"三者相辅相成、环环相扣形成闭环，这是一种人人参与、共同选择和实现共享福祉的形式。我们的团队成员都是拥有这样理念的教师和家长。
+                        </p>
+                        <p>
+                        我们的发展历程清晰而坚实：2022年，在塘桥街道的大力支持下，我们成功建设了塘桥创客空间，为社区科技教育奠定了坚实基础；2024年，我们又与陆家嘴街道共建社区创新屋，进一步扩大了服务范围和影响力。这种"街道支持+专业运营"的合作模式，成为我们在社区教育领域持续发展的重要保障。
+                    </p>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="bg-gradient-to-br from-blue-100 to-orange-100 rounded-2xl p-8 h-96 flex items-center justify-center overflow-hidden">
+                        <img src="resources/因未创新-使命.jpg" alt="因未创新使命" class="w-full h-full object-contain rounded-lg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="section-title text-3xl md:text-4xl font-bold mb-4">使命愿景</h2>
+                <p class="text-xl text-gray-600">我们的核心价值观与服务理念</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="value-card bg-white rounded-2xl p-8 shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900">我们的使命</h3>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed" data-mission-text>
+                        <strong>为党育人、为国育才是因未创新的使命。</strong>教育是国之大计、党之大计。党的二十大报告对实施科教兴国战略作了深远的谋划，尤其是教育、科技、人才三位一体的论述，令人心潮澎湃，因未创新做的事情就是完成社区毛细血管的一环。
+                    </p>
+                </div>
+                
+                <div class="value-card bg-white rounded-2xl p-8 shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900">我们的愿景</h3>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed" data-vision-text="">
+                        教育始终被摆在优先发展的战略地位，成为全社会最关心最支持的事业。联合国教科文组织第41届大会发布说：教育可以视为一种社会契约。
+                    </p>
+                    <p class="text-gray-600 leading-relaxed mt-4">
+                        希望有更多的创新实验室，它不是商业模式却更能提升我们的幸福感；它不是权威机构却更能促进孩子的学习力；它不是高新科技却更能改善我们的小生活；它是一种公益模式，就像诞生在车库里的苹果公司，我们的孩子也需要一个 Community Garage！
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Advantages -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="section-title text-3xl md:text-4xl font-bold mb-4">特色优势</h2>
+                <p class="text-xl text-gray-600">我们的核心优势与特色</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Three Highs -->
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-8 shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-white font-bold text-lg">三高</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900">我们的"三高"特点</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                <span class="text-white text-sm font-bold">1</span>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-900 mb-1">黏性高</h4>
+                                <p class="text-gray-600">家庭参与度高，长期稳定合作，形成紧密的社区教育生态圈</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                <span class="text-white text-sm font-bold">2</span>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-900 mb-1">产出高</h4>
+                                <p class="text-gray-600">200个家庭产出1500万公益价值，教育成果显著</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                <span class="text-white text-sm font-bold">3</span>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-900 mb-1">识别度高</h4>
+                                <p class="text-gray-600">品牌影响力强，社区认可度高，成为社区科技教育的标杆</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Four Haves -->
+                <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-8 shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-white font-bold text-lg">四有</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900">我们的"四有"优势</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                <span class="text-white text-sm font-bold">1</span>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-900 mb-1">有优势</h4>
+                                <p class="text-gray-600">人人都需要，人人看得见，满足广泛社区需求</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                <span class="text-white text-sm font-bold">2</span>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-900 mb-1">有专业</h4>
+                                <p class="text-gray-600">细节到每一颗螺丝钉，专业师资团队，精细化教学管理</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                <span class="text-white text-sm font-bold">3</span>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-900 mb-1">有温度</h4>
+                                <p class="text-gray-600">应用在社区，复制在社区，贴近居民实际需求</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                <span class="text-white text-sm font-bold">4</span>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-900 mb-1">有特色</h4>
+                                <p class="text-gray-600">传统课程不传统，跨界学习是创新，心系弱势群体，扶助村小教师</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Features -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="section-title text-3xl md:text-4xl font-bold mb-4">服务特色</h2>
+                <p class="text-xl text-gray-600">专业、温暖、创新的服务理念</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">专业师资</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        拥有教师资格证、专业无人机驾驶证书、机器人教练证、apple设计师证书等资质的专业教师团队，
+                        经过统一的社区服务资质培训，确保教学质量和服务水平。
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">社区导向</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        深入社区，服务家庭，构建"全龄融通"又"细分深耕"的服务体系，
+                        从3岁到75岁，每个年龄段都能找到适合的课程和活动。
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">公益服务</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        坚持公益性定价策略，让每个家庭都能负担得起优质的科技教育，
+                        真正实现科技教育的普及化和公平化。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Honors & Certifications -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="section-title text-3xl md:text-4xl font-bold mb-4">资质荣誉</h2>
+                <p class="text-xl text-gray-600">专业认证与社会认可</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-2xl p-6 text-center shadow-lg">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">浦东新区年度优秀</h3>
+                    <p class="text-sm text-gray-600">2025年度浦东新区创新屋绩效评估优秀等级</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-6 text-center shadow-lg">
+                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">创新荣誉奖</h3>
+                    <p class="text-sm text-gray-600">连续三年荣获浦东区团委颁发 
+ "浦东新区青年社会创新公益奖"</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-6 text-center shadow-lg">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">社区服务资质</h3>
+                    <p class="text-sm text-gray-600">浦东新区科经委2家社区创新屋挂牌 
+ 上海市共青团委员会首批市级创新实验室挂牌</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-6 text-center shadow-lg">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">优质服务奖</h3>
+                    <p class="text-sm text-gray-600">连续两年荣获"浦东新区妇联基层品牌项目"优秀评级</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 bg-gradient-to-r from-blue-600 to-orange-600">
+        <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                加入我们，共创美好未来
+            </h2>
+            <p class="text-xl text-white/90 mb-8">
+                让我们一起为社区科技教育事业贡献力量
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="contact.html" class="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
+                    联系我们
+                </a>
+                <a href="services.html" class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-blue-600 transition-colors">
+                    了解服务
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center mb-4">
+                    <img src="resources/logo.png" alt="因未创新" class="h-8 w-auto mr-3">
+                    <span class="text-xl font-bold">因未创新</span>
+                </div>
+                <p class="text-gray-400 mb-4">
+                    上海浦东因未创新文化服务中心 - 让科技创新温暖每一个社区
+                </p>
+                <p class="text-gray-500 text-sm">
+                    © 2025 因未创新文化服务中心. 保留所有权利.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js?v=20251208"></script>
+</body>
+</html>
