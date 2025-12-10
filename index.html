@@ -249,6 +249,92 @@
         </div>
     </section>
 
+   <!-- Lab Equipment Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">实验室装备实况</h2>
+                <p class="text-xl text-gray-600">先进的实验室设备，为创新教育提供强大支持</p>
+            </div>
+            
+            <div class="relative overflow-hidden rounded-2xl shadow-2xl" id="lab-carousel">
+                <div class="flex carousel-container" id="labCarousel">
+                    <div class="carousel-slide min-w-full">
+                        <img src="resources/激光切割机介绍.png" alt="激光切割机" class="w-full h-96 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">激光切割机</h3>
+                            <p class="text-white/80">高精度激光切割设备，支持多种材料加工</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide min-w-full">
+                        <img src="resources/CNC雕刻机.png" alt="CNC雕刻机" class="w-full h-96 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">CNC雕刻机</h3>
+                            <p class="text-white/80">精密数控雕刻设备，实现复杂形状加工</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide min-w-full">
+                        <img src="resources/电动工具介绍.png" alt="电动工具" class="w-full h-96 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">电动工具</h3>
+                            <p class="text-white/80">专业级电动工具套装，满足各种制作需求</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide min-w-full">
+                        <img src="resources/实验室环境1.JPG" alt="实验室环境1" class="w-full h-96 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">实验室环境</h3>
+                            <p class="text-white/80">宽敞明亮的创新实验空间</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide min-w-full">
+                        <img src="resources/实验室环境2.JPG" alt="实验室环境2" class="w-full h-96 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">多功能工作区</h3>
+                            <p class="text-white/80">配备多种设备的多功能创作空间</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide min-w-full">
+                        <img src="resources/实验室环境4.JPG" alt="实验室环境4" class="w-full h-96 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">专业设备区</h3>
+                            <p class="text-white/80">专业级设备区域，支持高精度制作</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide min-w-full">
+                        <img src="resources/实验室环境5.JPG" alt="实验室环境5" class="w-full h-96 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">展示交流区</h3>
+                            <p class="text-white/80">作品展示与交流分享的专属区域</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 轮播控制按钮 -->
+                <button class="carousel-prev absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 shadow-lg transition-all">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </button>
+                <button class="carousel-next absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 shadow-lg transition-all">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+                
+                <!-- 轮播指示器 -->
+                <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2" id="carouselIndicators">
+                    <button class="w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-colors" data-slide="0"></button>
+                    <button class="w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-colors" data-slide="1"></button>
+                    <button class="w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-colors" data-slide="2"></button>
+                    <button class="w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-colors" data-slide="3"></button>
+                    <button class="w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-colors" data-slide="4"></button>
+                    <button class="w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-colors" data-slide="5"></button>
+                    <button class="w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-colors" data-slide="6"></button>
+                </div>
+            </div>
+            
+
     <!-- Features Section -->
     <section id="features" class="py-20 bg-gradient-to-br from-blue-50 via-white to-orange-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -415,92 +501,6 @@
         </div>
     </section>
 
-
-    <!-- Lab Equipment Section -->
-    <section class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">实验室装备实况</h2>
-                <p class="text-xl text-gray-600">先进的实验室设备，为创新教育提供强大支持</p>
-            </div>
-            
-            <div class="relative overflow-hidden rounded-2xl shadow-2xl" id="lab-carousel">
-                <div class="flex carousel-container" id="labCarousel">
-                    <div class="carousel-slide min-w-full">
-                        <img src="resources/激光切割机介绍.png" alt="激光切割机" class="w-full h-96 object-cover">
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
-                            <h3 class="text-2xl font-bold text-white mb-2">激光切割机</h3>
-                            <p class="text-white/80">高精度激光切割设备，支持多种材料加工</p>
-                        </div>
-                    </div>
-                    <div class="carousel-slide min-w-full">
-                        <img src="resources/CNC雕刻机.png" alt="CNC雕刻机" class="w-full h-96 object-cover">
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
-                            <h3 class="text-2xl font-bold text-white mb-2">CNC雕刻机</h3>
-                            <p class="text-white/80">精密数控雕刻设备，实现复杂形状加工</p>
-                        </div>
-                    </div>
-                    <div class="carousel-slide min-w-full">
-                        <img src="resources/电动工具介绍.png" alt="电动工具" class="w-full h-96 object-cover">
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
-                            <h3 class="text-2xl font-bold text-white mb-2">电动工具</h3>
-                            <p class="text-white/80">专业级电动工具套装，满足各种制作需求</p>
-                        </div>
-                    </div>
-                    <div class="carousel-slide min-w-full">
-                        <img src="resources/实验室环境1.JPG" alt="实验室环境1" class="w-full h-96 object-cover">
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
-                            <h3 class="text-2xl font-bold text-white mb-2">实验室环境</h3>
-                            <p class="text-white/80">宽敞明亮的创新实验空间</p>
-                        </div>
-                    </div>
-                    <div class="carousel-slide min-w-full">
-                        <img src="resources/实验室环境2.JPG" alt="实验室环境2" class="w-full h-96 object-cover">
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
-                            <h3 class="text-2xl font-bold text-white mb-2">多功能工作区</h3>
-                            <p class="text-white/80">配备多种设备的多功能创作空间</p>
-                        </div>
-                    </div>
-                    <div class="carousel-slide min-w-full">
-                        <img src="resources/实验室环境4.JPG" alt="实验室环境4" class="w-full h-96 object-cover">
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
-                            <h3 class="text-2xl font-bold text-white mb-2">专业设备区</h3>
-                            <p class="text-white/80">专业级设备区域，支持高精度制作</p>
-                        </div>
-                    </div>
-                    <div class="carousel-slide min-w-full">
-                        <img src="resources/实验室环境5.JPG" alt="实验室环境5" class="w-full h-96 object-cover">
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
-                            <h3 class="text-2xl font-bold text-white mb-2">展示交流区</h3>
-                            <p class="text-white/80">作品展示与交流分享的专属区域</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 轮播控制按钮 -->
-                <button class="carousel-prev absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 shadow-lg transition-all">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                    </svg>
-                </button>
-                <button class="carousel-next absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 shadow-lg transition-all">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                </button>
-                
-                <!-- 轮播指示器 -->
-                <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2" id="carouselIndicators">
-                    <button class="w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-colors" data-slide="0"></button>
-                    <button class="w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-colors" data-slide="1"></button>
-                    <button class="w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-colors" data-slide="2"></button>
-                    <button class="w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-colors" data-slide="3"></button>
-                    <button class="w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-colors" data-slide="4"></button>
-                    <button class="w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-colors" data-slide="5"></button>
-                    <button class="w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-colors" data-slide="6"></button>
-                </div>
-            </div>
-            
 
         </div>
     </section>
