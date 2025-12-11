@@ -8,12 +8,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3  # 升级到新版本
+        uses: actions/checkout@v3
+      
+      - name: Remove .git directory
+        run: rm -rf .git   # ✅ 添加这行，删除 .git 目录
       
       - name: Deploy static to Tencent CloudBase
-        uses: TencentCloudBase/cloudbase-action@v1  # 升级到新版本
+        uses: TencentCloudBase/cloudbase-action@v1
         with:
           secretId: ${{ secrets.SECRET_ID }}
           secretKey: ${{ secrets.SECRET_KEY }}
           envId: ${{ secrets.ENV_ID }}
-          staticSrcPath: .  # 根据你的实际构建目录调整
+          staticSrcPath: .
