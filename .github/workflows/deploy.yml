@@ -16,4 +16,4 @@ jobs:
           secretId: ${{ secrets.SECRET_ID }}
           secretKey: ${{ secrets.SECRET_KEY }}
           envId: ${{ secrets.ENV_ID }}
-          staticSrcPath: build  # 根据你的实际构建目录调整
+          staticSrcPath: .  # 根据你的实际构建目录调整
